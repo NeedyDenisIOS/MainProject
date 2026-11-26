@@ -4,10 +4,14 @@ import task2.model.Developer;
 import task2.model.Employee;
 import task2.model.Intern;
 import task2.model.Manager;
+import utils.Validator;
+
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
+        Scanner sc = new Scanner(System.in);
         Employee[] employees = new Employee[3];
 
         employees[0] = new Developer(101, "Alex", 100);
@@ -47,5 +51,11 @@ public class Main {
         copy.setBasicSalary(2300);
 
         System.out.println(copy);
+
+
+        System.out.println("Show the employee by index");
+        int index = sc.nextInt();
+        Validator.requireValidIndex(index, employees.length, employees);
+        System.out.println(employees[index]);
     }
 }

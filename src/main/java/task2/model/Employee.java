@@ -1,5 +1,7 @@
 package task2.model;
 
+import utils.Validator;
+
 public abstract class Employee implements Cloneable{
 
     private final int id;
@@ -7,9 +9,9 @@ public abstract class Employee implements Cloneable{
     private double basicSalary;
 
     public Employee(int id, String name, double basicSalary) {
-        if (id <= 0) {
-            throw new IllegalArgumentException("Incorrect ID value");
-        }
+        Validator.requirePositive(id, "id", this);
+        Validator.requireString(name, "name", this);
+        Validator.requirePositive(basicSalary, "basicSalary", this);
         this.id = id;
         setName(name);
         setBasicSalary(basicSalary);
@@ -28,16 +30,10 @@ public abstract class Employee implements Cloneable{
     }
 
     public void setName(String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("Incorrect name value");
-        }
         this.name = name;
     }
 
     public void setBasicSalary(double basicSalary) {
-        if (basicSalary <= 0) {
-            throw new IllegalArgumentException("Incorrect salary value");
-        }
         this.basicSalary = basicSalary;
     }
 

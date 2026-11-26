@@ -1,5 +1,7 @@
 package task2.model;
 
+import utils.Validator;
+
 public class Manager extends Employee{
 
     public Manager(int id, String name, double basicSalary) {
@@ -16,7 +18,7 @@ public class Manager extends Employee{
       if (this == obj) return true;
       if (obj == null || getClass() != obj.getClass()) return true;
       Manager other = (Manager) obj;
-      return this.getId() == other.getId();
+      return Validator.safeEquals(this.getId(), other.getId());
     }
 
     @Override

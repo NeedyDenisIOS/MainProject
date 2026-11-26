@@ -1,5 +1,7 @@
 package task2.model;
 
+import utils.Validator;
+
 public class Intern extends Employee{
 
     public Intern(int id, String name, double basicSalary) {
@@ -16,7 +18,7 @@ public class Intern extends Employee{
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Intern other = (Intern) obj;
-        return this.getId() == other.getId();
+        return Validator.safeEquals(this.getId(), other.getId());
     }
 
     @Override
