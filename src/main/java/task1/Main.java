@@ -4,13 +4,12 @@ import task1.model.Circle;
 import task1.model.Rectangle;
 import task1.model.Shape;
 import task1.model.Triangle;
-import javax.xml.transform.Source;
-import java.sql.SQLOutput;
 
 public class Main {
     public static void main(String[] args) {
 
-        Shape[] shapes = new Shape[3];
+    Scanner sc = new Scanner(System.in);
+    Shape[] shapes = new Shape[3];
 
         shapes[0] = new Circle(3.0);
         shapes[1] = new Rectangle(4.0, 6.0);
@@ -43,6 +42,10 @@ public class Main {
 
         System.out.println("NewCircle and cloneCircle: " + (newCircle == cloneCircle));
 
-        System.out.println("equals circles: " + (newCircle.equals(cloneCircle)));
-    }
+    System.out.println("equals circles: " + (newCircle.equals(cloneCircle)));
+
+    System.out.println("Show the figure by index");
+    int index = sc.nextInt();
+    Validator.requireValidIndex(index, shapes.length, shapes);
+    System.out.println(shapes[index]);
 }

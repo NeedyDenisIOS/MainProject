@@ -2,9 +2,9 @@ package task1.model;
 
 public abstract class Shape implements Cloneable {
 
-    public abstract double area();
+    public abstract double getArea();
 
-    public abstract double perimeter();
+    public abstract double getPerimeter();
 
     @Override
     public abstract String toString();
