@@ -2,7 +2,9 @@ package task2.model;
 
 import utils.Validator;
 
-public abstract class Employee implements Cloneable{
+public abstract class Employee {
+
+    private static final double EPSILON = 1e-9;
 
     private final int id;
     private String name;
@@ -16,6 +18,8 @@ public abstract class Employee implements Cloneable{
         setName(name);
         setBasicSalary(basicSalary);
     }
+
+    public abstract int getBonusPercent();
 
     public int getId() {
         return id;
@@ -37,17 +41,27 @@ public abstract class Employee implements Cloneable{
         this.basicSalary = basicSalary;
     }
 
-    public abstract int getBonusPercent();
     public double calculateFinalSalary() {
         return basicSalary + (basicSalary * getBonusPercent() / 100);
     }
 
     @Override
-    public abstract boolean equals(Object obj);
+    public int hashCode() {
+        return Integer.hashCode(getId());
+    }
 
     @Override
-    public abstract String toString();
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Developer other = (Developer) obj;
+        return this.getId() == other.getId() &&
+                this.getName().equals(other.getName()) &&
+                Math.abs(this.getBasicSalary() - other.getBasicSalary()) < EPSILON;
+    }
 
-    @Override
-    public abstract Employee clone();
 }
+
+
+
+
