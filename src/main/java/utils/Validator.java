@@ -24,9 +24,4 @@ public final class Validator {
                     index, arrayLength, obj));
         }
     }
-
-    public static boolean safeEquals(Object a, Object b) {
-        if (a == null || b == null) return false;
-        return a.equals(b);
-    }
 }
