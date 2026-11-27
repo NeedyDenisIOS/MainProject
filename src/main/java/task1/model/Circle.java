@@ -1,14 +1,14 @@
 package task1.model;
 
+import utils.Validator;
+
 public class Circle extends Shape {
 
     private static final double EPSILON = 1e-9;
     private final double radius;
 
     public Circle(double radius) {
-        if (radius <= 0) {
-            throw new IllegalArgumentException("The radius value must be positive.");
-        }
+        Validator.requirePositive(radius, "radius", this);
         this.radius = radius;
     }
 
@@ -17,18 +17,18 @@ public class Circle extends Shape {
     }
 
     @Override
-    public double area() {
+    public double getArea() {
         return Math.PI * radius * radius;
     }
 
     @Override
-    public double perimeter() {
+    public double getPerimeter() {
         return 2 * Math.PI * radius;
     }
 
     @Override
     public String toString() {
-        return String.format("Circle: radius - %.2f, area - %.2f, perimeter - %.2f", radius, area(), perimeter());
+        return String.format("Circle: radius - %.2f, getArea - %.2f, getPerimeter - %.2f", radius, getArea(), getPerimeter());
     }
 
     @Override
@@ -44,6 +44,6 @@ public class Circle extends Shape {
 
         Circle other = (Circle) obj;
 
-        return Math.abs(this.area() - other.area()) < EPSILON;
+        return Math.abs(this.getArea() - other.getArea()) < EPSILON;
     }
 }

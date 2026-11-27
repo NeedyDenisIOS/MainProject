@@ -1,6 +1,6 @@
 package task1.model;
 
-import org.w3c.dom.css.Rect;
+import utils.Validator;
 
 public class Rectangle extends Shape{
 
@@ -10,9 +10,8 @@ public class Rectangle extends Shape{
     private final double height;
 
     public Rectangle(double width, double height) {
-        if (width <= 0 || height <= 0) {
-            throw new IllegalArgumentException("The value of the sides must be positive.");
-        }
+        Validator.requirePositive(width, "width", this);
+        Validator.requirePositive(height, "height", this);
         this.width = width;
         this.height = height;
     }
@@ -26,19 +25,19 @@ public class Rectangle extends Shape{
     }
 
     @Override
-    public double area() {
+    public double getArea() {
         return width * height;
     }
 
     @Override
-    public double perimeter() {
+    public double getPerimeter() {
         return 2 * (width + height);
     }
 
     @Override
     public String toString() {
-        return String.format("Rectangle: width - %.2f, height - %.2f, area - %.2f, perimeter - %.2f",
-                width, height, area(), perimeter());
+        return String.format("Rectangle: width - %.2f, height - %.2f, getArea - %.2f, getPerimeter - %.2f",
+                width, height, getArea(), getPerimeter());
     }
 
     @Override
@@ -54,6 +53,6 @@ public class Rectangle extends Shape{
 
         Rectangle other = (Rectangle) obj;
 
-        return Math.abs(this.area() - other.area()) < EPSILON;
+        return Math.abs(this.getArea() - other.getArea()) < EPSILON;
     }
 }

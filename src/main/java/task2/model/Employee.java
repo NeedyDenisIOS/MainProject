@@ -1,19 +1,25 @@
 package task2.model;
 
-public abstract class Employee implements Cloneable{
+import utils.Validator;
+
+public abstract class Employee {
+
+    private static final double EPSILON = 1e-9;
 
     private final int id;
     private String name;
     private double basicSalary;
 
     public Employee(int id, String name, double basicSalary) {
-        if (id <= 0) {
-            throw new IllegalArgumentException("Incorrect ID value");
-        }
+        Validator.requirePositive(id, "id", this);
+        Validator.requireString(name, "name", this);
+        Validator.requirePositive(basicSalary, "basicSalary", this);
         this.id = id;
         setName(name);
         setBasicSalary(basicSalary);
     }
+
+    public abstract int getBonusPercent();
 
     public int getId() {
         return id;
@@ -28,30 +34,34 @@ public abstract class Employee implements Cloneable{
     }
 
     public void setName(String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("Incorrect name value");
-        }
         this.name = name;
     }
 
     public void setBasicSalary(double basicSalary) {
-        if (basicSalary <= 0) {
-            throw new IllegalArgumentException("Incorrect salary value");
-        }
         this.basicSalary = basicSalary;
     }
 
-    public abstract int getBonusPercent();
     public double calculateFinalSalary() {
         return basicSalary + (basicSalary * getBonusPercent() / 100);
     }
 
     @Override
-    public abstract boolean equals(Object obj);
+    public int hashCode() {
+        return Integer.hashCode(getId());
+    }
 
     @Override
-    public abstract String toString();
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Developer other = (Developer) obj;
+        return this.getId() == other.getId() &&
+                this.getName().equals(other.getName()) &&
+                Math.abs(this.getBasicSalary() - other.getBasicSalary()) < EPSILON;
+    }
 
-    @Override
-    public abstract Employee clone();
 }
+
+
+
+

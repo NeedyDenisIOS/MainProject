@@ -1,6 +1,6 @@
 package task2.model;
 
-public class Manager extends Employee{
+public class Manager extends Employee {
 
     public Manager(int id, String name, double basicSalary) {
         super(id, name, basicSalary);
@@ -12,25 +12,12 @@ public class Manager extends Employee{
     }
 
     @Override
-    public boolean equals(Object obj) {
-      if (this == obj) return true;
-      if (obj == null || getClass() != obj.getClass()) return true;
-      Manager other = (Manager) obj;
-      return this.getId() == other.getId();
-    }
-
-    @Override
     public String toString() {
         return String.format("""
                         Id: %d
                         Name: %s
-                        Salary: %.2f"""
-                ,getId(), getName(), calculateFinalSalary());
-    }
-
-    @Override
-    public int hashCode() {
-        return Integer.hashCode(getId());
+                        Salary: %.2f""",
+                getId(), getName(), calculateFinalSalary());
     }
 
     @Override
